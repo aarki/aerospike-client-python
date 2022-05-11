@@ -147,7 +147,7 @@ AerospikeClient_Truncate(AerospikeClient * self, PyObject * args, PyObject * kwd
 			goto CLEANUP;
 		}
 
-	} else (if PyInt_Check(py_nanos)) {
+	} else if (PyInt_Check(py_nanos)) {
 		long tempInt;
 		tempInt = PyInt_AsLong(py_nanos);
 
