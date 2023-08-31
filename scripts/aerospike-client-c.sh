@@ -49,6 +49,14 @@ download() {
   mkdir -p ${dest_dir}
 
   url="https://artifacts.aerospike.com/aerospike-client-c/${version}/${artifact}"
+
+  PKG_DIST=$($SCRIPT_DIR/os_version)
+  if [ "${PKG_DIST}" == "ubuntu22" ]; then
+    # Use openssl fixed C client on newer ubuntus
+    # Source at https://github.com/aarki/aerospike-client-c/tree/v4.6.18_openssl3_fix
+    url="https://s3.us-west-2.amazonaws.com/selfhost-packages/${artifact}"
+  fi
+
   printf "info: downloading '%s' to '%s'\n" "${url}" "${dest}"
 
   if has_cmd curl; then
